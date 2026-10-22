@@ -38,7 +38,7 @@ token_value = response.json()["token"]
 # запрос до того как готова
 response2 = requests.get(URL, params= {"token":"GET"}, verify = False)
 # ждем и делаем запрос
-time.sleep(16)
+time.sleep(17)
 response3 = requests.get(URL, params= {"token":{token_value}}, verify = False)
 assert response3.json()["status"] == "Job is ready"
 assert "result" in response3.json()
