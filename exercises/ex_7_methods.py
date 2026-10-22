@@ -3,7 +3,9 @@
 Сегодня задача должна быть попроще. У нас есть вот такой URL: https://playground.learnqa.ru/ajax/api/compare_query_type
 Запрашивать его можно четырьмя разными HTTP-методами: POST, GET, PUT, DELETE
 
-При этом в запросе должен быть параметр method. Он должен содержать указание метода, с помощью которого вы делаете запрос. Например, если вы делаете GET-запрос, параметр method должен равняться строке ‘GET’. Если POST-запросом - то параметр method должен равняться ‘POST’. И так далее.
+При этом в запросе должен быть параметр method. Он должен содержать указание метода, с помощью которого вы делаете
+запрос. Например, если вы делаете GET-запрос, параметр method должен равняться строке ‘GET’.
+Если POST-запросом - то параметр method должен равняться ‘POST’. И так далее.
 
 Надо написать скрипт, который делает следующее:
 
@@ -19,5 +21,24 @@
 А для всех остальных через data=
 
 Итогом должна быть ссылка на коммит со скриптом и ответы на все 4 вопроса."""
+
+import requests
+
+url = "https://playground.learnqa.ru/ajax/api/compare_query_type"
+methods = ["GET", "POST", "PUT", "DELETE", "HEAD"]
+
+response = requests.post(url, data= {"method": "POST"}, verify= False)
+print(response)
+print(response.text)
+
+for method in methods:
+    if method == "GET":
+        response = requests.request(method, url, params={"method": method}, verify=False)
+    else:
+        response = requests.request(method, url, data = {"method": method}, verify = False)
+
+
+    print(response.url)
+    print(response.text)
 
 
